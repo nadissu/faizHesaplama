@@ -1,0 +1,6 @@
+# ads.txt dosyası
+# AdSense onayı aldıktan sonra aşağıdaki satırı kendi pub ID'nizle değiştirin:
+# google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
+
+# Örnek:
+google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0

@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="<%= description %>">
+    <meta name="keywords" content="<%= keywords %>">
+    <meta name="author" content="Faiz Hesaplama">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="<%= title %>">
+    <meta property="og:description" content="<%= description %>">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="tr_TR">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<%= title %>">
+    <meta name="twitter:description" content="<%= description %>">
+
+    <title>
+        <%= title %>
+    </title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💳</text></svg>">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+        crossorigin="anonymous"></script>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Kredi Kartı Faiz Hesaplama",
+        "description": "Kredi kartı borcunuzu ne kadar sürede ödeyeceğinizi ve toplam faiz maliyetinizi hesaplayın.",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "TRY"
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">
+                <span class="logo-icon">💳</span>
+                Kredi Kartı Faiz Hesaplama
+            </h1>
+            <p class="header-subtitle">Borçlarınızı analiz edin, ödeme stratejinizi planlayın</p>
+        </div>
+    </header>
+
+    <!-- Top Ad -->
+    <div class="container">
+        <div class="ad-container ad-container-horizontal" id="ad-top">
+            <!-- AdSense Ad Unit -->
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Tab Navigation -->
+            <nav class="tab-navigation" role="tablist">
+                <button class="tab-btn active" data-tab="minimum" role="tab" aria-selected="true">
+                    <span class="tab-btn-icon">📉</span>
+                    Asgari Ödeme
+                </button>
+                <button class="tab-btn" data-tab="fixed" role="tab" aria-selected="false">
+                    <span class="tab-btn-icon">📊</span>
+                    Sabit Ödeme
+                </button>
+                <button class="tab-btn" data-tab="multiple" role="tab" aria-selected="false">
+                    <span class="tab-btn-icon">💰</span>
+                    Çoklu Kart
+                </button>
+                <button class="tab-btn" data-tab="installment" role="tab" aria-selected="false">
+                    <span class="tab-btn-icon">🧾</span>
+                    Taksit Hesaplama
+                </button>
+            </nav>
+
+            <!-- Calculator Sections -->
+
+            <!-- 1. Minimum Payment Calculator -->
+            <section class="calculator-section active" id="minimum" role="tabpanel">
+                <div class="calculator-card">
+                    <div class="card-header">
+                        <h2 class="card-title">Asgari Ödeme Hesaplama</h2>
+                        <p class="card-description">Sadece asgari ödeme yaparsanız borcunuzu ne kadar sürede
+                            kapatırsınız?</p>
+                    </div>
+
+                    <form id="minimumForm">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label" for="minDebt">Toplam Borç</label>
+                                <input type="text" class="form-input money-input debt-input" id="minDebt"
+                                    placeholder="10.000" required>
+                                <span class="input-suffix">₺</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="minBank">Banka Seçin</label>
+                                <select class="form-input bank-select" id="minBank">
+                                    <option value="">Manuel Giriş</option>
+                                    <option value="auto">📊 TCMB Oranı (Borç Tutarına Göre)</option>
+                                    <option value="3.25">Ziraat Bankası - %3.25</option>
+                                    <option value="3.25">Halkbank - %3.25</option>
+                                    <option value="3.25">Vakıfbank - %3.25</option>
+                                    <option value="3.75">Garanti BBVA - %3.75</option>
+                                    <option value="3.75">Yapı Kredi - %3.75</option>
+                                    <option value="3.75">İş Bankası - %3.75</option>
+                                    <option value="4.25">Akbank - %4.25</option>
+                                    <option value="4.25">QNB Finansbank - %4.25</option>
+                                    <option value="4.25">Denizbank - %4.25</option>
+                                    <option value="4.25">TEB - %4.25</option>
+                                    <option value="4.25">ING Bank - %4.25</option>
+                                    <option value="4.25">HSBC - %4.25</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="minRate">Aylık Faiz Oranı</label>
+                                <input type="text" class="form-input rate-input" id="minRate"
+                                    placeholder="Banka seçin veya girin" required>
+                                <span class="input-suffix">%</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="minPercent">Asgari Ödeme Oranı</label>
+                                <input type="text" class="form-input" id="minPercent" placeholder="20" value="20"
+                                    required>
+                                <span class="input-suffix">%</span>
+                            </div>
+                        </div>
+                        <div class="rate-info" id="minRateInfo" style="display: none;">
+                            <span class="rate-info-icon">ℹ️</span>
+                            <span class="rate-info-text">TCMB 2026: &lt;30K TL: %3.25 | 30K-180K TL: %3.75 | &gt;180K
+                                TL: %4.25</span>
+                        </div>
+
+                        <div class="btn-group">
+                            <button type="submit" class="btn btn-primary">
+                                🔍 Hesapla
+                            </button>
+                            <button type="reset" class="btn btn-secondary">
+                                🔄 Temizle
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="results-container" id="minimumResults">
+                        <div class="results-grid">
+                            <div class="result-card highlight">
+                                <div class="result-label">📅 Kapanış Süresi</div>
+                                <div class="result-value gradient" id="minMonths">-</div>
+                                <div class="result-note">ay</div>
+                            </div>
+                            <div class="result-card danger">
+                                <div class="result-label">💸 Toplam Faiz</div>
+                                <div class="result-value" id="minTotalInterest">-</div>
+                                <div class="result-note">ödeyeceğiniz faiz</div>
+                            </div>
+                            <div class="result-card warning">
+                                <div class="result-label">💰 Toplam Ödeme</div>
+                                <div class="result-value" id="minTotalPayment">-</div>
+                                <div class="result-note">ana para + faiz</div>
+                            </div>
+                            <div class="result-card">
+                                <div class="result-label">📊 Faiz/Ana Para</div>
+                                <div class="result-value" id="minInterestRatio">-</div>
+                                <div class="result-note">oranı</div>
+                            </div>
+                        </div>
+
+                        <div class="schedule-container">
+                            <div class="schedule-header">
+                                <span class="schedule-title">📋 Aylık Ödeme Planı</span>
+                                <button class="schedule-toggle" id="minToggleSchedule">Göster</button>
+                            </div>
+                            <div class="schedule-table-wrapper" id="minScheduleWrapper">
+                                <table class="schedule-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Ay</th>
+                                            <th>Ödeme</th>
+                                            <th>Faiz</th>
+                                            <th>Ana Para</th>
+                                            <th>Kalan Borç</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="minScheduleBody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="info-box-title">💡 TCMB 2026 Faiz Oranları</div>
+                        <div class="info-box-content">
+                            TCMB tarafından belirlenen güncel kredi kartı faiz oranları borç tutarına göre
+                            kademelendiriliyor:
+                            <ul>
+                                <li><strong>30.000 TL altı:</strong> Aylık %3.25 (Yıllık ~46.8%)</li>
+                                <li><strong>30.000 - 180.000 TL:</strong> Aylık %3.75 (Yıllık ~55.5%)</li>
+                                <li><strong>180.000 TL üzeri:</strong> Aylık %4.25 (Yıllık ~64.9%)</li>
+                            </ul>
+                            Asgari ödeme oranı genellikle %20 ile %40 arasında değişir.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Fixed Payment Calculator -->
+            <section class="calculator-section" id="fixed" role="tabpanel">
+                <div class="calculator-card">
+                    <div class="card-header">
+                        <h2 class="card-title">Sabit Ödeme Hesaplama</h2>
+                        <p class="card-description">Belirlediğiniz sabit ödeme ile borcunuzu ne zaman kapatırsınız?</p>
+                    </div>
+
+                    <form id="fixedForm">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label" for="fixedDebt">Toplam Borç</label>
+                                <input type="text" class="form-input money-input debt-input" id="fixedDebt"
+                                    placeholder="10.000" required>
+                                <span class="input-suffix">₺</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="fixedBank">Banka Seçin</label>
+                                <select class="form-input bank-select" id="fixedBank">
+                                    <option value="">Manuel Giriş</option>
+                                    <option value="auto">📊 TCMB Oranı (Borç Tutarına Göre)</option>
+                                    <option value="3.25">Ziraat Bankası - %3.25</option>
+                                    <option value="3.25">Halkbank - %3.25</option>
+                                    <option value="3.25">Vakıfbank - %3.25</option>
+                                    <option value="3.75">Garanti BBVA - %3.75</option>
+                                    <option value="3.75">Yapı Kredi - %3.75</option>
+                                    <option value="3.75">İş Bankası - %3.75</option>
+                                    <option value="4.25">Akbank - %4.25</option>
+                                    <option value="4.25">QNB Finansbank - %4.25</option>
+                                    <option value="4.25">Denizbank - %4.25</option>
+                                    <option value="4.25">TEB - %4.25</option>
+                                    <option value="4.25">ING Bank - %4.25</option>
+                                    <option value="4.25">HSBC - %4.25</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="fixedRate">Aylık Faiz Oranı</label>
+                                <input type="text" class="form-input rate-input" id="fixedRate"
+                                    placeholder="Banka seçin veya girin" required>
+                                <span class="input-suffix">%</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="fixedPayment">Aylık Ödeme</label>
+                                <input type="text" class="form-input money-input" id="fixedPayment" placeholder="1.500"
+                                    required>
+                                <span class="input-suffix">₺</span>
+                            </div>
+                        </div>
+                        <div class="rate-info" id="fixedRateInfo" style="display: none;">
+                            <span class="rate-info-icon">ℹ️</span>
+                            <span class="rate-info-text">TCMB 2026: &lt;30K TL: %3.25 | 30K-180K TL: %3.75 | &gt;180K
+                                TL: %4.25</span>
+                        </div>
+
+                        <div class="btn-group">
+                            <button type="submit" class="btn btn-primary">
+                                🔍 Hesapla
+                            </button>
+                            <button type="reset" class="btn btn-secondary">
+                                🔄 Temizle
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="results-container" id="fixedResults">
+                        <div class="results-grid">
+                            <div class="result-card highlight">
+                                <div class="result-label">📅 Kapanış Süresi</div>
+                                <div class="result-value gradient" id="fixedMonths">-</div>
+                                <div class="result-note">ay</div>
+                            </div>
+                            <div class="result-card danger">
+                                <div class="result-label">💸 Toplam Faiz</div>
+                                <div class="result-value" id="fixedTotalInterest">-</div>
+                                <div class="result-note">ödeyeceğiniz faiz</div>
+                            </div>
+                            <div class="result-card warning">
+                                <div class="result-label">💰 Toplam Ödeme</div>
+                                <div class="result-value" id="fixedTotalPayment">-</div>
+                                <div class="result-note">ana para + faiz</div>
+                            </div>
+                            <div class="result-card success">
+                                <div class="result-label">✨ Tasarruf</div>
+                                <div class="result-value" id="fixedSavings">-</div>
+                                <div class="result-note">asgari ödemeye göre</div>
+                            </div>
+                        </div>
+
+                        <div class="schedule-container">
+                            <div class="schedule-header">
+                                <span class="schedule-title">📋 Aylık Ödeme Planı</span>
+                                <button class="schedule-toggle" id="fixedToggleSchedule">Göster</button>
+                            </div>
+                            <div class="schedule-table-wrapper" id="fixedScheduleWrapper">
+                                <table class="schedule-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Ay</th>
+                                            <th>Ödeme</th>
+                                            <th>Faiz</th>
+                                            <th>Ana Para</th>
+                                            <th>Kalan Borç</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="fixedScheduleBody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="info-box-title">💡 Öneri</div>
+                        <div class="info-box-content">
+                            Sabit ve yüksek bir ödeme tutarı belirlemek, toplam faiz yükünüzü önemli ölçüde azaltır.
+                            Aylık ödemeniz en az borç × (faiz oranı + %1) formülünü karşılamalıdır, aksi halde borç hiç
+                            kapanmaz.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Multiple Cards Calculator -->
+            <section class="calculator-section" id="multiple" role="tabpanel">
+                <div class="calculator-card">
+                    <div class="card-header">
+                        <h2 class="card-title">Çoklu Kart Borç Analizi</h2>
+                        <p class="card-description">Tüm kredi kartlarınızın toplam borç durumunu analiz edin</p>
+                    </div>
+
+                    <div class="cards-list" id="cardsList">
+                        <div class="card-item" data-index="0">
+                            <div class="form-group">
+                                <label class="form-label">Kart Adı</label>
+                                <input type="text" class="form-input card-name" placeholder="Kart 1" value="Kart 1">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Borç Tutarı</label>
+                                <input type="text" class="form-input money-input card-debt" placeholder="5.000">
+                                <span class="input-suffix">₺</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Aylık Faiz</label>
+                                <input type="text" class="form-input card-rate" placeholder="4.42">
+                                <span class="input-suffix">%</span>
+                            </div>
+                            <button type="button" class="btn-remove" title="Kartı Sil">✕</button>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn-add-card" id="addCardBtn">
+                        ➕ Yeni Kart Ekle
+                    </button>
+
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary" id="calculateMultiple">
+                            🔍 Analiz Et
+                        </button>
+                        <button type="button" class="btn btn-secondary" id="resetMultiple">
+                            🔄 Temizle
+                        </button>
+                    </div>
+
+                    <div class="results-container" id="multipleResults">
+                        <div class="results-grid">
+                            <div class="result-card highlight">
+                                <div class="result-label">💳 Kart Sayısı</div>
+                                <div class="result-value gradient" id="multiCardCount">-</div>
+                                <div class="result-note">adet</div>
+                            </div>
+                            <div class="result-card danger">
+                                <div class="result-label">💸 Toplam Borç</div>
+                                <div class="result-value" id="multiTotalDebt">-</div>
+                            </div>
+                            <div class="result-card warning">
+                                <div class="result-label">📊 Ort. Faiz Oranı</div>
+                                <div class="result-value" id="multiAvgRate">-</div>
+                                <div class="result-note">ağırlıklı ortalama</div>
+                            </div>
+                            <div class="result-card">
+                                <div class="result-label">💰 Aylık Faiz Yükü</div>
+                                <div class="result-value" id="multiMonthlyInterest">-</div>
+                            </div>
+                        </div>
+
+                        <div class="schedule-container">
+                            <div class="schedule-header">
+                                <span class="schedule-title">📋 Kart Detayları</span>
+                                <button class="schedule-toggle" id="multiToggleSchedule">Göster</button>
+                            </div>
+                            <div class="schedule-table-wrapper show" id="multiScheduleWrapper">
+                                <table class="schedule-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Kart</th>
+                                            <th>Borç</th>
+                                            <th>Faiz Oranı</th>
+                                            <th>Aylık Faiz</th>
+                                            <th>Oran</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="multiScheduleBody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="info-box-title">💡 Strateji</div>
+                        <div class="info-box-content">
+                            Birden fazla kredi kartı borcunuz varsa, iki popüler ödeme stratejisi uygulayabilirsiniz:
+                            <ul>
+                                <li><strong>Kartopu Yöntemi:</strong> En küçük borçtan başlayarak ödeyin (motivasyon
+                                    için).</li>
+                                <li><strong>Çığ Yöntemi:</strong> En yüksek faizli karttan başlayarak ödeyin (tasarruf
+                                    için).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Installment Calculator -->
+            <section class="calculator-section" id="installment" role="tabpanel">
+                <div class="calculator-card">
+                    <div class="card-header">
+                        <h2 class="card-title">Taksit Hesaplama</h2>
+                        <p class="card-description">Taksitli alışverişlerinizin gerçek maliyetini hesaplayın</p>
+                    </div>
+
+                    <form id="installmentForm">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label" for="instAmount">Alışveriş Tutarı</label>
+                                <input type="text" class="form-input money-input" id="instAmount" placeholder="12.000"
+                                    required>
+                                <span class="input-suffix">₺</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="instMonths">Taksit Sayısı</label>
+                                <input type="number" class="form-input" id="instMonths" placeholder="12" min="2"
+                                    max="36" required>
+                                <span class="input-suffix">ay</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="instRate">Taksit Faiz Oranı (Aylık)</label>
+                                <input type="text" class="form-input" id="instRate" placeholder="2.49" required>
+                                <span class="input-suffix">%</span>
+                            </div>
+                        </div>
+
+                        <div class="btn-group">
+                            <button type="submit" class="btn btn-primary">
+                                🔍 Hesapla
+                            </button>
+                            <button type="reset" class="btn btn-secondary">
+                                🔄 Temizle
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="results-container" id="installmentResults">
+                        <div class="results-grid">
+                            <div class="result-card highlight">
+                                <div class="result-label">💵 Aylık Taksit</div>
+                                <div class="result-value gradient" id="instMonthlyPayment">-</div>
+                            </div>
+                            <div class="result-card danger">
+                                <div class="result-label">💸 Toplam Faiz</div>
+                                <div class="result-value" id="instTotalInterest">-</div>
+                            </div>
+                            <div class="result-card warning">
+                                <div class="result-label">💰 Toplam Ödeme</div>
+                                <div class="result-value" id="instTotalPayment">-</div>
+                            </div>
+                            <div class="result-card">
+                                <div class="result-label">📈 Yıllık Faiz</div>
+                                <div class="result-value" id="instAnnualRate">-</div>
+                            </div>
+                        </div>
+
+                        <div class="schedule-container">
+                            <div class="schedule-header">
+                                <span class="schedule-title">📋 Taksit Planı</span>
+                                <button class="schedule-toggle" id="instToggleSchedule">Göster</button>
+                            </div>
+                            <div class="schedule-table-wrapper" id="instScheduleWrapper">
+                                <table class="schedule-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Taksit No</th>
+                                            <th>Ödeme</th>
+                                            <th>Faiz</th>
+                                            <th>Ana Para</th>
+                                            <th>Kalan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="instScheduleBody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="info-box-title">💡 Dikkat</div>
+                        <div class="info-box-content">
+                            Taksitli alışverişlerde gösterilen "faizsiz" ifadesi yanıltıcı olabilir.
+                            Bankalar genellikle taksit komisyonu veya vade farkı uygular.
+                            Peşin fiyat ile taksitli toplam tutarı karşılaştırarak gerçek maliyeti görebilirsiniz.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Middle Ad -->
+            <div class="ad-container ad-container-horizontal" id="ad-middle" style="margin-top: 40px;">
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                    data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </div>
+
+            <!-- FAQ Section -->
+            <section class="faq-section">
+                <h2 class="faq-title">Sıkça Sorulan Sorular</h2>
+                <div class="faq-grid">
+                    <article class="faq-item">
+                        <div class="faq-question">
+                            <span>Kredi kartı faizi nasıl hesaplanır?</span>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            Kredi kartı faizi, ödenmemiş bakiye üzerinden günlük veya aylık olarak hesaplanır.
+                            Türkiye'de aylık akdi faiz oranı TCMB tarafından belirlenen üst sınıra göre bankalar
+                            tarafından uygulanır. Faiz hesaplamasında bileşik faiz formülü kullanılır.
+                        </div>
+                    </article>
+                    <article class="faq-item">
+                        <div class="faq-question">
+                            <span>Asgari ödeme nedir?</span>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            Asgari ödeme, kredi kartı ekstrenizin belirli bir yüzdesidir (genellikle %20-40).
+                            Bu tutarın altında ödeme yaparsanız gecikme faizi ve cezai işlemler uygulanabilir.
+                            Ancak sadece asgari ödeme yapmak, borcun çok uzun sürede kapanmasına ve yüksek faiz
+                            ödenmesine neden olur.
+                        </div>
+                    </article>
+                    <article class="faq-item">
+                        <div class="faq-question">
+                            <span>Taksitli alışveriş faizi farklı mıdır?</span>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            Evet, taksitli alışverişlerde uygulanan faiz oranı genellikle nakit avans veya
+                            ekstre faizinden farklıdır. Mağaza ve banka anlaşmalarına göre değişen bu oranlar,
+                            bazen "faizsiz" olarak sunulsa da vade farkı veya komisyon içerebilir.
+                        </div>
+                    </article>
+                    <article class="faq-item">
+                        <div class="faq-question">
+                            <span>Kredi kartı borcumu nasıl hızlı kapatabilirim?</span>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            Borcunuzu hızlı kapatmak için: 1) Asgari tutardan fazla ödeme yapın,
+                            2) Yüksek faizli kartları önce ödeyin, 3) Yeni harcamalardan kaçının,
+                            4) Borç transferi veya yapılandırma seçeneklerini değerlendirin,
+                            5) Bütçenizi gözden geçirip tasarruf alanları bulun.
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Bottom Ad -->
+    <div class="container">
+        <div class="ad-container ad-container-horizontal" id="ad-bottom">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">© 2026 Kredi Kartı Faiz Hesaplama. Tüm hesaplamalar bilgi amaçlıdır.</p>
+            <nav class="footer-links">
+                <a href="#" class="footer-link">Gizlilik Politikası</a>
+                <a href="#" class="footer-link">Kullanım Şartları</a>
+                <a href="#" class="footer-link">İletişim</a>
+            </nav>
+        </div>
+    </footer>
+
+    <!-- Calculator Script -->
+    <script src="/js/calculator.js"></script>
+</body>
+
+</html>
