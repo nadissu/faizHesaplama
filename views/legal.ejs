@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3750212059332214"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">
+                <span class="logo-icon">💳</span>
+                Kredi Kartı Faiz Hesaplama
+            </h1>
+            <nav class="nav-links">
+                <a href="/">Hesaplama</a>
+                <a href="/hakkimizda">Hakkımızda</a>
+                <a href="/iletisim">İletişim</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="info-article">
+                <h1 class="article-title">
+                    <%= pageTitle %>
+                </h1>
+
+                <% if (contentKey==='privacy' ) { %>
+                    <p>Son Güncelleme: 06.02.2026</p>
+                    <p>Gizliliğiniz bizim için önemlidir. Bu Gizlilik Politikası, sitemizi kullanırken hangi bilgilerin
+                        toplandığını açıklar.</p>
+                    <h3>1. Çerezler ve Reklamlar</h3>
+                    <p>Sitemiz, hizmetlerimizi sunmak ve trafiği analiz etmek için çerezler kullanır. Ayrıca Google
+                        AdSense aracılığıyla kişiselleştirilmiş reklamlar sunulabilir.</p>
+                    <h3>2. Veri Güvenliği</h3>
+                    <p>Sitemizde girdiğiniz finansal veriler (borç tutarı, faiz oranı vb.) sunucularımızda saklanmaz,
+                        sadece tarayıcınızda anlık hesaplama yapmak için kullanılır.</p>
+                    <% } else if (contentKey==='terms' ) { %>
+                        <p>Sitemizi kullanarak bu şartları kabul etmiş sayılırsınız.</p>
+                        <h3>1. Bilgilendirme Amaçlıdır</h3>
+                        <p>Bu sitedeki hesaplamalar kesinlik arz etmez ve bağlayıcı değildir. Bankanızın uyguladığı faiz
+                            oranları farklılık gösterebilir.</p>
+                        <h3>2. Sorumluluk Reddi</h3>
+                        <p>Hesaplama hatalarından veya verilerin yanlış yorumlanmasından doğacak zararlardan site
+                            yönetimi sorumlu değildir.</p>
+                        <% } else if (contentKey==='cookies' ) { %>
+                            <p>Web sitemiz deneyiminizi iyileştirmek için çerezleri kullanır.</p>
+                            <ul>
+                                <li><strong>Zorunlu Çerezler:</strong> Sitenin çalışması için gerekir.</li>
+                                <li><strong>Analitik Çerezler:</strong> Ziyaretçi sayısını takip etmemizi sağlar.</li>
+                                <li><strong>Reklam Çerezleri:</strong> Google ve iş ortaklarının size uygun reklamlar
+                                    göstermesini sağlar.</li>
+                            </ul>
+                            <% } %>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">© 2026 Kredi Kartı Faiz Hesaplama.</p>
+            <nav class="footer-links">
+                <a href="/gizlilik" class="footer-link">Gizlilik Politikası</a>
+                <a href="/kullanim-sartlari" class="footer-link">Kullanım Şartları</a>
+                <a href="/iletisim" class="footer-link">İletişim</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+
+</html>

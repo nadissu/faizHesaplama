@@ -4,7 +4,7 @@ const helmet = require('helmet');
 const path = require('path');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 // Security middleware with CSP configured for AdSense
 app.use(helmet({
@@ -57,6 +57,54 @@ app.get('/sitemap.xml', (req, res) => {
 });
 
 // 404 handler
+app.use((req, res, next) => {
+    // Only handle if it's not one of the new routes (although Express handles this order automatically)
+    next();
+});
+
+// Info Pages
+app.get('/hakkimizda', (req, res) => {
+    res.render('hakkimizda', {
+        title: 'Hakkımızda | Kredi Kartı Faiz Hesaplama',
+        description: 'Faiz Hesaplama aracı hakkında bilgiler, misyonumuz ve vizyonumuz.',
+        keywords: 'hakkımızda, faiz hesaplama, kredi kartı borç hesaplama'
+    });
+});
+
+app.get('/iletisim', (req, res) => {
+    res.render('iletisim', {
+        title: 'İletişim | Kredi Kartı Faiz Hesaplama',
+        description: 'Bize ulaşın. Soru, öneri ve reklam talepleri.',
+        keywords: 'iletişim, destek'
+    });
+});
+
+// Legal Pages
+app.get('/gizlilik', (req, res) => {
+    res.render('legal', {
+        title: 'Gizlilik Politikası | Kredi Kartı Faiz Hesaplama',
+        pageTitle: 'Gizlilik Politikası',
+        contentKey: 'privacy'
+    });
+});
+
+app.get('/kullanim-sartlari', (req, res) => {
+    res.render('legal', {
+        title: 'Kullanım Şartları | Kredi Kartı Faiz Hesaplama',
+        pageTitle: 'Kullanım Şartları',
+        contentKey: 'terms'
+    });
+});
+
+app.get('/cerez-politikasi', (req, res) => {
+    res.render('legal', {
+        title: 'Çerez Politikası | Kredi Kartı Faiz Hesaplama',
+        pageTitle: 'Çerez Politikası',
+        contentKey: 'cookies'
+    });
+});
+
+// 404 handler (Final)
 app.use((req, res) => {
     res.status(404).render('index', {
         title: 'Sayfa Bulunamadı | Kredi Kartı Faiz Hesaplama',
